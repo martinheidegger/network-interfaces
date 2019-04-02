@@ -1,6 +1,6 @@
 {
   "name": "@leichtgewicht/network-interfaces",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Observing network interfaces and changes to them.",
   "main": "index.js",
   "scripts": {
