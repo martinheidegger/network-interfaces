@@ -1,5 +1,5 @@
 {
-  "name": "networkinterfaces",
+  "name": "@leichtgewicht/network-interfaces",
   "version": "1.0.0",
   "description": "Observing network interfaces and changes to them.",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "release": "standard-version"
   },
   "bin": {
-    "networkinterfaces": "./bin/networkInterfaces"
+    "network-interfaces": "./bin/network-interfaces"
   },
   "author": "Martin Heidegger <martin.heidegger@gmail.com>",
   "license": "MIT",
