@@ -14,7 +14,7 @@ const Family = require('./const/family.js')
 const JSONStringModes = require('./const/json-string-modes.js')
 const ChangeType = require('./const/change-type.js')
 
-const MAX_AGE = 250
+const DEFAULT_MAX_AGE = 250
 
 function keyForInfo (interfaceId, info) {
   return JSON.stringify([
@@ -340,7 +340,7 @@ module.exports = {
   NetworkInterfaces,
   get networkInterfaces () {
     if (instance === undefined) {
-      instance = new NetworkInterfaces({ maxAge: MAX_AGE })
+      instance = new NetworkInterfaces({ maxAge: DEFAULT_MAX_AGE })
     }
     return instance
   }

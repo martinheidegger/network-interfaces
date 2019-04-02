@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { networkInterfaces, JSONStringModes } = require('../')
+const { networkInterfaces, JSONStringModes } = require('..')
 
 const { changes, warnings } = networkInterfaces.stream(JSONStringModes.line)
 

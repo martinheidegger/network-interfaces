@@ -116,18 +116,15 @@ export declare class NetworkInterfaces extends EventEmitter {
     warnings: Readable
   }
 
-  matchSubnet (address: string): Address | null
-
   /**
    * Checks if a given address is part of the local addresses.
    */
   isLocalAddress (family: Family, address: string): boolean
 
   /**
-   * To 
    * If the passed-in address is a local address it will return
    * the matching internal address, else it will just return
-   * the address
+   * the address.
    */
   preferInternalForLocal (family: Family, address: string): string
 }
