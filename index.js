@@ -25,39 +25,6 @@ function keyForInfo (interfaceId, info) {
   ])
 }
 
-function * collectAddresses (keys, interfaceId, infos) {
-  for (const info of infos) {
-    const key = keyForInfo(interfaceId, info)
-    const entry = {
-      ...info,
-      key,
-      hash: objectHash(info),
-      interfaceId
-    }
-    if (keys.has(key)) {
-      this.emit('warning', Object.assign(new Error(`Multiple network addresses with same key detected ${key}`), {
-        a: keys.get(key),
-        b: entry,
-        interfaceId
-      }))
-      continue
-    }
-    keys.set(key, entry)
-    yield entry
-  }
-}
-
-function * collectInterfaces () {
-  const keys = new Map()
-  const rawInterfaces = os.networkInterfaces()
-  for (const interfaceId in rawInterfaces) {
-    yield {
-      interfaceId,
-      addresses: collectAddresses(keys, interfaceId, rawInterfaces[interfaceId])
-    }
-  }
-}
-
 function createNetworkInfo (interfaceId, activeInterfaceId, nicTypes) {
   const info = {
     id: interfaceId,
@@ -117,6 +84,39 @@ class NetworkInterfaces extends EventEmitter {
         timeout = undefined
       }
     })
+  }
+
+  * _collectAddresses (keys, interfaceId, infos) {
+    for (const info of infos) {
+      const key = keyForInfo(interfaceId, info)
+      const entry = {
+        ...info,
+        key,
+        hash: objectHash(info),
+        interfaceId
+      }
+      if (keys.has(key)) {
+        this.emit('warning', Object.assign(new Error(`Multiple network addresses with same key detected ${key}`), {
+          a: keys.get(key),
+          b: entry,
+          interfaceId
+        }))
+        continue
+      }
+      keys.set(key, entry)
+      yield entry
+    }
+  }
+
+  * _collectInterfaces () {
+    const keys = new Map()
+    const rawInterfaces = os.networkInterfaces()
+    for (const interfaceId in rawInterfaces) {
+      yield {
+        interfaceId,
+        addresses: this._collectAddresses(keys, interfaceId, rawInterfaces[interfaceId])
+      }
+    }
   }
 
   get maxAge () {
@@ -198,7 +198,7 @@ class NetworkInterfaces extends EventEmitter {
 
   _update () {
     const deletedInterfaces = new Set(this._interfaces.keys())
-    for (const { interfaceId, addresses } of collectInterfaces()) {
+    for (const { interfaceId, addresses } of this._collectInterfaces()) {
       deletedInterfaces.delete(interfaceId)
 
       const networkInterface = this._interfaces.get(interfaceId)
