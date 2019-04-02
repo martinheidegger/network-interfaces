@@ -1,6 +1,6 @@
 'use strict'
 const wmic = require('wmic')
-const NicType = require('../nic-type.js')
+const NicType = require('../const/nic-type.js')
 
 module.exports = cb => {
   wmic.get_list('nic', (err, nics) => {
