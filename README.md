@@ -2,8 +2,8 @@
 
 <a href="https://travis-ci.org/martinheidegger/network-interfaces"><img src="https://travis-ci.org/martinheidegger/network-interfaces.svg?branch=master" alt="Build Status"/></a>
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Maintainability](https://api.codeclimate.com/v1/badges/fe7f58777d60b93f2e42/maintainability)](https://codeclimate.com/github/martinheidegger/network-interfaces/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/fe7f58777d60b93f2e42/test_coverage)](https://codeclimate.com/github/martinheidegger/network-interfaces/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bcf4a208312035681141/maintainability)](https://codeclimate.com/github/martinheidegger/network-interfaces/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bcf4a208312035681141/test_coverage)](https://codeclimate.com/github/martinheidegger/network-interfaces/test_coverage)
 
 `network-interfaces` is similar to `os.networkInterfaces()` but offers a cross-platform util to listen to changes
 in the network setup.
