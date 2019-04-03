@@ -194,6 +194,7 @@ class NetworkInterfaces extends EventEmitter {
     this.updateActiveInterfaceId()
     this.updateNicTypes()
     this._update()
+    this._nextUpdate = Date.now() + this._maxAge
   }
 
   _update () {
