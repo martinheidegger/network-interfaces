@@ -104,11 +104,16 @@ export declare class NetworkInterfaces extends EventEmitter {
   update (): PromiseLike<void>
   checkUpdate (): PromiseLike<void>
 
-  addEventListener(event: 'data', handler: (change: AnyChange) => void)
-  on(event: 'data', handler: (change: AnyChange) => void)
-  once(event: 'data', handler: (change: AnyChange) => void)
-  prependListener(event: 'data', handler: (change: AnyChange) => void)
-  prependOnceListener(event: 'data', handler: (change: AnyChange) => void)
+  addEventListener(event: 'change', handler: (change?: AnyChange) => void)
+  on(event: 'change', handler: (change?: AnyChange) => void)
+  once(event: 'change', handler: (change?: AnyChange) => void)
+  prependListener(event: 'change', handler: (change?: AnyChange) => void)
+  prependOnceListener(event: 'change', handler: (change?: AnyChange) => void)
+  addEventListener(event: 'warning', handler: (err?) => void)
+  on(event: 'warning', handler: (err?) => void)
+  once(event: 'warning', handler: (err) => void)
+  prependListener(event: 'warning', handler: (err?) => void)
+  prependOnceListener(event: 'warning', handler: (err?) => void)
 
   active (): NetworkInterface
   stream (stringMode?: JSONStringMode): {
