@@ -8,6 +8,7 @@ const { Readable } = require('stream')
 
 const { getActive } = require('./get-active/index.js')
 const { getNicTypes } = require('./get-nic-types/index.js')
+const bgbash = require('bgbash')
 
 const NicType = require('./const/nic-type.js')
 const Family = require('./const/family.js')
@@ -81,6 +82,7 @@ class NetworkInterfaces extends EventEmitter {
         refreshTimeout()
       } else {
         clearTimeout(timeout)
+        bgbash.close(() => {})
         timeout = undefined
       }
     })

@@ -1,5 +1,6 @@
 'use strict'
-const { exec } = require('child_process')
+const cmd = 'networksetup -listallhardwareports'
+const bgbash = require('bgbash')
 const NicType = require('../const/nic-type.js')
 const deviceReg = /Device: (.*)/
 const portReg = /Hardware Port: (.*)/
@@ -24,7 +25,7 @@ function determineNicType (str) {
 }
 
 module.exports = cb => {
-  exec('networksetup -listallhardwareports', (err, stdout) => {
+  bgbash.exec(cmd, (err, stdout) => {
     if (err) return cb(err, undefined)
     const str = stdout.toString()
     const result = {}

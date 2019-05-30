@@ -22,6 +22,7 @@
     "tap": "^12.6.1"
   },
   "dependencies": {
+    "bgbash": "^1.0.0",
     "fast-deep-equal": "^2.0.1",
     "has-listener": "^1.1.1",
     "object-hash": "^1.3.1",
