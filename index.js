@@ -18,12 +18,16 @@ const ChangeType = require('./const/change-type.js')
 const DEFAULT_MAX_AGE = 250
 
 function keyForInfo (interfaceId, info) {
-  return JSON.stringify([
+  const parts = [
     interfaceId,
     info.mac,
     info.family,
-    info['scopeid'] || 0
-  ])
+    info.scopeid || 0
+  ]
+  if (info.family === Family.IPv6) {
+    parts.push(info.netmask)
+  }
+  return JSON.stringify(parts)
 }
 
 function createNetworkInfo (interfaceId, activeInterfaceId, nicTypes) {
@@ -165,7 +169,7 @@ class NetworkInterfaces extends EventEmitter {
   updateActiveInterfaceId () {
     getActive((cause, activeInterfaceId) => {
       if (cause) {
-        this.emit('warning', Object.assign(new Error(`Couldn't identify the active interface.`), {
+        this.emit('warning', Object.assign(new Error('Couldn\'t identify the active interface.'), {
           code: 'EACTIVEERR',
           cause: cause.stack || cause
         }))
@@ -180,7 +184,7 @@ class NetworkInterfaces extends EventEmitter {
   updateNicTypes () {
     getNicTypes((cause, data) => {
       if (cause) {
-        this.emit('warning', Object.assign(new Error(`Wasn't able to lookup the interfaces.`), {
+        this.emit('warning', Object.assign(new Error('Wasn\'t able to lookup the interfaces.'), {
           code: 'ENICTYPE',
           cause: cause.stack || cause
         }))
@@ -315,7 +319,7 @@ class NetworkInterfaces extends EventEmitter {
 
   _deleteLocalLookup (entry) {
     const { family } = entry
-    let localAddresses = this._localAddressByFamily.get(family)
+    const localAddresses = this._localAddressByFamily.get(family)
     if (localAddresses === undefined) {
       return
     }

@@ -21,11 +21,11 @@ test('networkinterfaces', t => {
   }
   t.notEquals(os.networkInterfaces, _backup.networkInterfaces, 'interfaces mock enabled')
 
-  let getActive = cb => setImmediate(cb, null, null)
+  const getActive = cb => setImmediate(cb, null, null)
   getActiveModule.getActive = cb => getActive(cb)
   t.pass('active mock enabled')
 
-  let getNicTypes = cb => setImmediate(cb, null, {})
+  const getNicTypes = cb => setImmediate(cb, null, {})
   getNicTypesModule.getNicTypes = cb => getNicTypes(cb)
   t.pass('nicTypes mock enabled')
 
@@ -158,7 +158,8 @@ test('networkinterfaces', t => {
     n.update()
     t.deepEquals(changes, [
       { type: 'add-address', address: { family: 'c', mac: 'do', key: '["lo","do","c",0]', hash: '67f871cd6359b9b2cdcc321ac0a6c6d2acdae78f', interfaceId: 'lo' } },
-      { type: 'update-address',
+      {
+        type: 'update-address',
         address: { family: 'b', mac: 'bo', address: 'x', key: '["lo","bo","b",0]', hash: '3919b087a3f56f5c4bf969bc8d765af84563abe6', interfaceId: 'lo' },
         oldAddress: { family: 'b', mac: 'bo', key: '["lo","bo","b",0]', hash: 'd98c1364c3131ab8fe28a3698baacfd88cd9f34d', interfaceId: 'lo' }
       },
