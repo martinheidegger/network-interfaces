@@ -4,6 +4,8 @@ const getActiveModule = require('./get-active/index.js')
 const getNicTypesModule = require('./get-nic-types/index.js')
 const { test } = require('tap')
 
+console.log(os.networkInterfaces())
+
 test('networkinterfaces', t => {
   let n
 
