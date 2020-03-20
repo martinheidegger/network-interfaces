@@ -4,8 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build:
-
-    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, ubuntu-latest]
 
     strategy:
       matrix:
@@ -13,10 +15,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }} on ${{matrix.TARGET}}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: node -v
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
