@@ -18,7 +18,7 @@
   "devDependencies": {
     "@types/node": "^13.9.2",
     "standard": "^14.3.3",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "tap": "^14.10.7"
   },
   "dependencies": {
